@@ -123,8 +123,8 @@ export default function App() {
         <div
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
           style={{
-            width: '300px',
-            height: '180px',
+            width: '400px',
+            height: '220px',
             backgroundImage: 'url("/game-over.png")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
