@@ -59,11 +59,30 @@ export default function App() {
       ctx.drawImage(ethImg, 25, newY - 20, 50, 50); // Gambar logo Ethereum sebagai pemain
 
 
-      ctx.fillStyle = 'green';
       newPipes.forEach(pipe => {
-        ctx.fillRect(pipe.x, 0, PIPE_WIDTH, pipe.height);
-        ctx.fillRect(pipe.x, pipe.height + PIPE_GAP, PIPE_WIDTH, 500);
-      });
+      const gradientTop = ctx.createLinearGradient(pipe.x, 0, pipe.x + PIPE_WIDTH, 0);
+      gradientTop.addColorStop(0, '#4CAF50');
+      gradientTop.addColorStop(0.5, '#2E7D32');
+      gradientTop.addColorStop(1, '#4CAF50');
+
+      const gradientBottom = ctx.createLinearGradient(pipe.x, pipe.height + PIPE_GAP, pipe.x + PIPE_WIDTH, 0);
+      gradientBottom.addColorStop(0, '#4CAF50');
+      gradientBottom.addColorStop(0.5, '#2E7D32');
+      gradientBottom.addColorStop(1, '#4CAF50');
+
+      // Top pipe
+      ctx.fillStyle = gradientTop;
+      ctx.fillRect(pipe.x, 0, PIPE_WIDTH, pipe.height);
+      ctx.strokeStyle = "#1B5E20";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(pipe.x, 0, PIPE_WIDTH, pipe.height);
+
+      // Bottom pipe
+      ctx.fillStyle = gradientBottom;
+      ctx.fillRect(pipe.x, pipe.height + PIPE_GAP, PIPE_WIDTH, 500);
+      ctx.strokeRect(pipe.x, pipe.height + PIPE_GAP, PIPE_WIDTH, 500);
+    });
+
 
       ctx.fillStyle = 'white';
       ctx.font = '24px Arial';
