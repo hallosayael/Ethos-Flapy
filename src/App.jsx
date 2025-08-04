@@ -1,5 +1,5 @@
 const ethImg = new Image();
-ethImg.src = "/eth-bird.png";
+ethImg.src = "/ethos-bird.png";
 
 import React, { useEffect, useRef, useState } from 'react';
 
