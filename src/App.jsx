@@ -88,7 +88,7 @@ export default function App() {
 
       ctx.fillStyle = 'white';
       ctx.font = '24px Arial';
-      ctx.fillText(Score: ${score}, 10, 30);
+      ctx.fillText(`Score: ${score}`, 10, 30);
     }, 20);
 
     return () => clearInterval(interval);
