@@ -67,7 +67,7 @@ export default function App() {
       setPipes(newPipes);
 
       // Check finish condition
-      if (score >= 3) {
+      if (score >= 10) {
         setFinished(true);
         setCode(generateCode());
         return;
