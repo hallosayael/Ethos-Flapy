@@ -1,3 +1,5 @@
+const ethImg = new Image();
+ethImg.src = "/eth-bird.png";
 
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -54,10 +56,8 @@ export default function App() {
       ctx.fillStyle = 'skyblue';
       ctx.fillRect(0, 0, 400, 500);
 
-      ctx.fillStyle = 'yellow';
-      ctx.beginPath();
-      ctx.arc(50, newY, 15, 0, 2 * Math.PI);
-      ctx.fill();
+      ctx.drawImage(ethImg, 35, newY - 15, 30, 30); // Gambar logo Ethereum sebagai pemain
+
 
       ctx.fillStyle = 'green';
       newPipes.forEach(pipe => {
