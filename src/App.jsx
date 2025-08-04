@@ -16,6 +16,9 @@ export default function App() {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [dimensions, setDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
+  const [ethImgLoaded, setEthImgLoaded] = useState(false);
+
+  const ethImg = useRef(null);
 
   const flap = () => {
     if (!gameOver) {
@@ -33,18 +36,30 @@ export default function App() {
     const handleResize = () => {
       setDimensions({ width: window.innerWidth, height: window.innerHeight });
     };
-
     window.addEventListener('resize', handleResize);
-    handleResize(); // initial call
+    handleResize();
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
+    const img = new Image();
+    img.src = "/ethos-bird.png";
+    img.onload = () => {
+      ethImg.current = img;
+      setEthImgLoaded(true);
+    };
+    img.onerror = () => {
+      console.error("Gagal memuat gambar ethos-bird.png");
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!ethImgLoaded) return;
+
     const canvas = canvasRef.current;
     canvas.width = dimensions.width;
     canvas.height = dimensions.height;
-
     const ctx = canvas.getContext('2d');
 
     if (pipes.length === 0) {
@@ -83,7 +98,9 @@ export default function App() {
       ctx.fillRect(0, 0, dimensions.width, dimensions.height);
 
       // draw bird
-      ctx.drawImage(ethImg, 50, newY - 25, 50, 50);
+      if (ethImg.current) {
+        ctx.drawImage(ethImg.current, 50, newY - 25, 50, 50);
+      }
 
       newPipes.forEach(pipe => {
         const gradientTop = ctx.createLinearGradient(pipe.x, 0, pipe.x + PIPE_WIDTH, 0);
@@ -115,7 +132,7 @@ export default function App() {
     }, 20);
 
     return () => clearInterval(interval);
-  }, [birdY, velocity, pipes, gameOver, dimensions]);
+  }, [ethImgLoaded, birdY, velocity, pipes, gameOver, dimensions]);
 
   return (
     <div className="bg-black m-0 p-0 overflow-hidden">
