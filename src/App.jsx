@@ -60,11 +60,13 @@ export default function App() {
 
 
       newPipes.forEach(pipe => {
+        // Gradien untuk pipa atas
       const gradientTop = ctx.createLinearGradient(pipe.x, 0, pipe.x + PIPE_WIDTH, 0);
       gradientTop.addColorStop(0, '#4CAF50');
       gradientTop.addColorStop(0.5, '#2E7D32');
       gradientTop.addColorStop(1, '#4CAF50');
 
+        // Gradien untuk pipa bawah (diperbaiki)
       const gradientBottom = ctx.createLinearGradient(pipe.x, 0, pipe.x + PIPE_WIDTH, 0);
       gradientBottom.addColorStop(0, '#4CAF50');
       gradientBottom.addColorStop(0.5, '#2E7D32');
