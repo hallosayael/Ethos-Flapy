@@ -146,5 +146,5 @@ return (
       Play Again
     </button>
   </div>
-);
+)}
 }
