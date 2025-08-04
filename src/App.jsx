@@ -121,21 +121,30 @@ return (
 
     {/* POPUP GAME OVER */}
     {gameOver && (
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-300 text-white p-8 rounded-lg shadow-lg z-50 w-80 text-center">
-        <h2 className="text-3xl font-bold mb-4">Game Over</h2>
-        <p className="text-xl mb-4">Final Score: {score}</p>
-        <button
-          onClick={flap}
-          className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-white font-semibold shadow"
-        >
-          Play Again
-        </button>
-      </div>
-    )}
-
-    <p className="mt-4 text-lg z-10">
-      {gameOver ? "Game Over - Click to Restart" : "Click to Flap"}
-    </p>
+  <div
+    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
+    style={{
+      width: '300px',
+      height: '180px',
+      backgroundImage: 'url("/game-over.png")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      paddingBottom: '20px',
+      color: 'white',
+      textShadow: '1px 1px 2px black',
+    }}
+  >
+    <p className="text-lg font-bold mb-2">Final Score: {score}</p>
+    <button
+      onClick={flap}
+      className="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-4 rounded shadow"
+    >
+      Play Again
+    </button>
   </div>
 );
 }
