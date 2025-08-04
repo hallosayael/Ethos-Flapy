@@ -100,7 +100,7 @@ export default function App() {
   }, [birdY, velocity, pipes, gameOver]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-blue-300 text-black">
       <canvas
         ref={canvasRef}
         width={CANVAS_WIDTH}
