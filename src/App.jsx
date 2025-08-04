@@ -20,9 +20,20 @@ export default function App() {
   const [pipes, setPipes] = useState([{ x: CANVAS_WIDTH, height: Math.random() * 300 + 50 }]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [finished, setFinished] = useState(false);
+  const [code, setCode] = useState('');
+
+  const generateCode = () => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let result = '';
+    for (let i = 0; i < 8; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+  };
 
   const flap = () => {
-    if (!gameOver) {
+    if (!gameOver && !finished) {
       setVelocity(FLAP);
     } else {
       // Reset game
@@ -31,6 +42,8 @@ export default function App() {
       setPipes([{ x: CANVAS_WIDTH, height: Math.random() * 300 + 50 }]);
       setScore(0);
       setGameOver(false);
+      setFinished(false);
+      setCode('');
     }
   };
 
@@ -38,7 +51,7 @@ export default function App() {
     const ctx = canvasRef.current.getContext('2d');
 
     const interval = setInterval(() => {
-      if (gameOver) return;
+      if (gameOver || finished) return;
 
       const newVelocity = velocity + GRAVITY;
       const newY = birdY + newVelocity;
@@ -52,6 +65,13 @@ export default function App() {
         setScore(prev => prev + 1);
       }
       setPipes(newPipes);
+
+      // Check finish condition
+      if (score >= 3) {
+        setFinished(true);
+        setCode(generateCode());
+        return;
+      }
 
       const currentPipe = newPipes[0];
       if (
@@ -106,7 +126,7 @@ export default function App() {
     }, 20);
 
     return () => clearInterval(interval);
-  }, [birdY, velocity, pipes, gameOver]);
+  }, [birdY, velocity, pipes, gameOver, finished, score]);
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-blue-300 text-black">
@@ -117,6 +137,27 @@ export default function App() {
         onClick={flap}
         className="border-4 border-white rounded shadow-lg"
       />
+
+      {/* POPUP FINISH */}
+      {finished && (
+        <div
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-gradient-to-b from-yellow-400 to-orange-500 text-black shadow-xl rounded-lg p-6 w-[340px] text-center"
+        >
+          <h2 className="text-2xl font-bold mb-2">🎉 CONGRATULATIONS! 🎉</h2>
+          <p className="text-lg mb-1">You completed the adventure!</p>
+          <p className="mb-4">You got a Code:</p>
+          <div className="bg-white text-black font-mono text-xl px-4 py-2 rounded mb-4 shadow-inner">
+            {code}
+          </div>
+          <p className="mb-4">Please redeem at <span className="font-bold">ethos.vision</span></p>
+          <button
+            onClick={flap}
+            className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded"
+          >
+            PLAY AGAIN
+          </button>
+        </div>
+      )}
 
       {/* POPUP GAME OVER */}
       {gameOver && (
@@ -149,7 +190,7 @@ export default function App() {
 
       {/* Info */}
       <p className="mt-4 text-lg z-10">
-        {gameOver ? "Game Over - Click to Restart" : "Click to Flap"}
+        {gameOver || finished ? "Click to Restart" : "Click to Flap"}
       </p>
     </div>
   );
