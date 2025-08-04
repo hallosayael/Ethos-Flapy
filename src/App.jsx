@@ -56,7 +56,7 @@ export default function App() {
       ctx.fillStyle = 'skyblue';
       ctx.fillRect(0, 0, 400, 500);
 
-      ctx.drawImage(ethImg, 35, newY - 15, 30, 30); // Gambar logo Ethereum sebagai pemain
+      ctx.drawImage(ethImg, 25, newY - 20, 50, 50); // Gambar logo Ethereum sebagai pemain
 
 
       ctx.fillStyle = 'green';
