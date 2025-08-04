@@ -7,6 +7,10 @@ const PIPE_GAP = 200;
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 600;
 
+const welcomeImg = new Image();
+welcomeImg.src = "/claim-spot.png";
+
+
 const ethImg = new Image();
 ethImg.src = "/ethos-bird.png";
 
@@ -60,8 +64,14 @@ export default function App() {
 
       // DRAWING
       ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+      // Gambar latar belakang warna biru muda
       ctx.fillStyle = 'skyblue';
       ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+      // Gambar kartu welcome di atas background
+      ctx.drawImage(welcomeImg, CANVAS_WIDTH / 2 - 154, 30, 308, 212);
+
 
       // Draw bird
       ctx.drawImage(ethImg, 50, newY - 25, 60, 60);
