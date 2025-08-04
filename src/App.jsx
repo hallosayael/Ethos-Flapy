@@ -65,7 +65,7 @@ export default function App() {
       gradientTop.addColorStop(0.5, '#2E7D32');
       gradientTop.addColorStop(1, '#4CAF50');
 
-      const gradientBottom = ctx.createLinearGradient(pipe.x, pipe.height + PIPE_GAP, pipe.x + PIPE_WIDTH, 0);
+      const gradientBottom = ctx.createLinearGradient(pipe.x, 0, pipe.x + PIPE_WIDTH, 0);
       gradientBottom.addColorStop(0, '#4CAF50');
       gradientBottom.addColorStop(0.5, '#2E7D32');
       gradientBottom.addColorStop(1, '#4CAF50');
