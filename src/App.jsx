@@ -125,7 +125,7 @@ export default function App() {
           style={{
             width: '400px',
             height: '220px',
-            backgroundImage: 'url("/game-overr.png")',
+            backgroundImage: 'url("/game-over.png")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             display: 'flex',
