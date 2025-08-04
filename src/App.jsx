@@ -109,18 +109,33 @@ export default function App() {
     return () => clearInterval(interval);
   }, [birdY, velocity, pipes, gameOver]);
 
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-blue-300 text-black">
-      <canvas
-        ref={canvasRef}
-        width={CANVAS_WIDTH}
-        height={CANVAS_HEIGHT}
-        onClick={flap}
-        className="border-4 border-white rounded shadow-lg"
-      />
-      <p className="mt-4 text-lg">
-        {gameOver ? "Game Over - Click to Restart" : "Click to Flap"}
-      </p>
-    </div>
-  );
+return (
+  <div className="relative flex flex-col items-center justify-center min-h-screen bg-blue-300 text-black">
+    <canvas
+      ref={canvasRef}
+      width={CANVAS_WIDTH}
+      height={CANVAS_HEIGHT}
+      onClick={flap}
+      className="border-4 border-white rounded shadow-lg"
+    />
+
+    {/* POPUP GAME OVER */}
+    {gameOver && (
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white p-8 rounded-lg shadow-lg z-50 w-80 text-center">
+        <h2 className="text-3xl font-bold mb-4">Game Over</h2>
+        <p className="text-xl mb-4">Final Score: {score}</p>
+        <button
+          onClick={flap}
+          className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-white font-semibold shadow"
+        >
+          Play Again
+        </button>
+      </div>
+    )}
+
+    <p className="mt-4 text-lg z-10">
+      {gameOver ? "Game Over - Click to Restart" : "Click to Flap"}
+    </p>
+  </div>
+);
 }
