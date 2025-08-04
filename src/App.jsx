@@ -121,7 +121,7 @@ return (
 
     {/* POPUP GAME OVER */}
     {gameOver && (
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white p-8 rounded-lg shadow-lg z-50 w-80 text-center">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-300 text-white p-8 rounded-lg shadow-lg z-50 w-80 text-center">
         <h2 className="text-3xl font-bold mb-4">Game Over</h2>
         <p className="text-xl mb-4">Final Score: {score}</p>
         <button
